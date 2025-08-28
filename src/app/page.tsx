@@ -1,103 +1,153 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useChat } from '@ai-sdk/react';
+import { useState, useEffect, useRef } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Bot, User, Send } from 'lucide-react';
+import { TypingIndicator } from '@/components/ui/typing-indicator';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import Image from 'next/image';
+
+export default function Chat() {
+  const [input, setInput] = useState('');
+  const [isStreaming, setIsStreaming] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const { messages, sendMessage } = useChat({
+    onFinish: () => setIsStreaming(false),
+  });
+
+  // Auto-scroll to bottom when new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  // Track streaming state
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage && lastMessage.role === 'assistant') {
+      // Check if the message appears to be incomplete (still streaming)
+      const hasIncompleteText = lastMessage.parts?.some(part => 
+        part.type === 'text' && part.text && !part.text.trim().endsWith('.') && !part.text.trim().endsWith('!') && !part.text.trim().endsWith('?')
+      );
+      setIsStreaming(hasIncompleteText || false);
+    }
+  }, [messages]);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="flex flex-col h-screen max-w-4xl mx-auto p-4">
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Messages Area */}
+      <ScrollArea className="flex-1 w-full rounded-md border">
+        <div className="p-4 space-y-4">
+          {messages.length === 0 && (
+            <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground py-8">
+              <Image src="/robot.png" height={100} width={100} alt='logo careerAI' className='mb-2'></Image>
+              <p className="text-lg font-medium mb-2">Selamat Datang di CareerAI</p>
+              <p className="text-sm">Mulai Konsultasi Karir Anda Dengan Kirim Pesan Di sini</p>
+            </div>
+          )}
+
+          {messages.map((message, index) => (
+            <Card key={message.id} className={`${
+              message.role === 'user' 
+                ? 'ml-auto max-w-[80%] bg-primary text-primary-foreground' 
+                : 'mr-auto max-w-[80%]'
+            }`}>
+              <CardContent className="p-4">
+                <div className="flex items-start space-x-3">
+                  <Avatar className="size-8">
+                    <AvatarFallback className={message.role === 'user' ? 'bg-primary-foreground/10' : ''}>
+                      {message.role === 'user' ? (
+                        <User className="size-4" />
+                      ) : (
+                        <Bot className="size-4" />
+                      )}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Badge 
+                        variant={message.role === 'user' ? 'secondary' : 'outline'}
+                        className={message.role === 'user' ? 'bg-primary-foreground/20 text-primary-foreground' : ''}
+                      >
+                        {message.role === 'user' ? 'You' : 'Assistant'}
+                      </Badge>
+                    </div>
+                    <div className="text-sm leading-relaxed relative">
+                      {message.parts?.map((part, i) => (
+                        <div key={i}>
+                          {part.type === 'text' ? (
+                            message.role === 'assistant' ? (
+                              <div className="markdown-content">
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                  {part.text}
+                                </ReactMarkdown>
+                              </div>
+                            ) : (
+                              part.text
+                            )
+                          ) : ''}
+                        </div>
+                      )) || ''}
+                      {/* Show blinking cursor for the last AI message if streaming */}
+                      {message.role === 'assistant' && 
+                       index === messages.length - 1 && 
+                       isStreaming && (
+                        <span className="inline-block w-0.5 h-4 bg-primary ml-1 animate-pulse"></span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+          
+          {/* Show typing indicator when waiting for first response */}
+          {messages.length > 0 && 
+           messages[messages.length - 1]?.role === 'user' && 
+           !messages.some(m => m.role === 'assistant' && m.id === messages[messages.length - 1]?.id) && (
+            <TypingIndicator />
+          )}
+          
+          <div ref={messagesEndRef} />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+      </ScrollArea>
+
+      {/* Input Area */}
+      <div className="mt-4">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (input.trim()) {
+              setIsStreaming(true);
+              sendMessage({ text: input });
+              setInput('');
+            }
+          }}
+          className="flex space-x-2"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+          <Input
+            value={input}
+            placeholder="Type your message here..."
+            onChange={(e) => setInput(e.target.value)}
+            disabled={isStreaming}
+            className="flex-1"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <Button 
+            type="submit" 
+            disabled={isStreaming || !input.trim()}
+            size="icon"
+          >
+            <Send className="size-4" />
+          </Button>
+        </form>
+      </div>
     </div>
   );
 }
