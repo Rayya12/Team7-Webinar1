@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# `CareerAI: Asisten Karir & Wawancara Profesional`
 
-First, run the development server:
+**Description**  
+CareerAI adalah asisten karir berbasis kecerdasan buatan yang dirancang untuk memandu Anda dalam menavigasi jalur profesional. Proyek ini berfungsi sebagai konsultan virtual yang menganalisis latar belakang, keterampilan, dan minat Anda untuk memberikan rekomendasi karir yang dipersonalisasi. Selain itu, CareerAI menyediakan fitur simulasi wawancara yang realistis, lengkap dengan umpan balik konstruktif untuk membantu Anda mempersiapkan diri menghadapi tantangan dunia kerja.
+**Objectives**
+Tujuan utama proyek ini adalah untuk membantu pengguna mencapai potensi karir terbaik mereka melalui:
+- Analisis Profil: Memberikan rekomendasi karir yang akurat dan relevan berdasarkan data pribadi Anda.
+- Simulasi Wawancara: Meningkatkan kepercayaan diri dan keterampilan wawancara melalui sesi latihan yang terstruktur.
+- Umpan Balik Terperinci: Menyediakan saran yang spesifik dan dapat ditindaklanjuti untuk perbaikan diri.
 
+---
+
+## 🧑‍💻 Team
+
+| **Name** | **Role**        |
+|-----------|----------------|
+|  
+ 	
+Rafly Zulfikar AlKautsar    | Role 1         |
+|  
+ 	
+Rayya Syauqi Alulu'i    | Role 2         |
+| Zidane Surya Nugraha    | Role 3         |
+| Ukasyah    | Role 4         |
+
+---
+
+## 🚀 Features
+- **🔐 Authentication Feature**: Fitur ini bertanggung jawab untuk keamanan dan manajemen akses pengguna. Ini adalah gerbang masuk bagi pengguna untuk bisa menggunakan chatbot, terutama jika ada data personalisasi yang perlu disimpan.
+- **🤖 AI Generator Feature**: Ini adalah "otak" dari chatbot ini. Fitur ini menggunakan kecerdasan buatan untuk memahami pertanyaan pengguna dan menghasilkan jawaban atau konten yang relevan dan kontekstual.
+- **♿ Accessibility Feature**: Fitur ini memastikan bahwa chatbot ini dapat digunakan oleh semua orang, termasuk mereka yang memiliki keterbatasan (disabilitas), seperti tunanetra atau tunarungu.
+- **📄 Document Parsing Feature**: Fitur ini memberikan kemampuan pada chatbot untuk "membaca" dan memahami isi dari sebuah dokumen yang diunggah oleh pengguna (misalnya PDF, Word, Txt).
+- **🎯 Intelligent Matching Feature**: Fitur ini menggunakan algoritma cerdas untuk menghubungkan atau mencocokkan dua atau lebih entitas data secara relevan. Ini lebih dari sekadar pencarian kata kunci biasa.
+- **📊 Adaptive Levels Feature**: Fitur ini memungkinkan chatbot untuk menyesuaikan tingkat kesulitan, kompleksitas, atau gaya bahasa responsnya sesuai dengan tingkat pemahaman atau histori interaksi pengguna.
+- **🌐 Decentralized Frontend Feature**: Ini adalah fitur yang lebih bersifat teknis dan arsitektural. Ini berarti antarmuka (tampilan) chatbot yang dilihat pengguna tidak bergantung pada satu server pusat, melainkan berjalan di atas jaringan terdistribusi (seperti blockchain/Web3).
+
+
+## 🛠 Tech Stack
+
+**Frontend:**
+- Next.js
+- Tailwind CSS
+- Shadcn UI
+
+**Backend:**
+- Next.js
+
+---
+
+## 🚀 How to Run the Project
+
+### Step 1. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Rayya12/Team7-Webinar1.git
+cd Team7-Webinar1
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Step 2. Installation Dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Step 3. Run the Development Server
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Step 4. Open Project in Browser
+```bash
+http://localhost:3000
+```
 
-## Learn More
+## 📋 Requirements (optional)
+- Node.js versi 18.18
+- Gemini API
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
