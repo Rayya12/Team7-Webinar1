@@ -17,12 +17,12 @@ Tujuan utama proyek ini adalah untuk membantu pengguna mencapai potensi karir te
 |-----------|----------------|
 |  
  	
-Rafly Zulfikar AlKautsar    | Role 1         |
+Rafly Zulfikar AlKautsar    |  UI/UX Design     |
 |  
  	
-Rayya Syauqi Alulu'i    | Role 2         |
-| Zidane Surya Nugraha    | Role 3         |
-| Ukasyah    | Role 4         |
+Rayya Syauqi Alulu'i    | Frontend Engineer        |
+| Zidane Surya Nugraha    | Prompt Engineer        |
+| Ukasyah    | Tester         |
 
 ---
 
@@ -49,6 +49,7 @@ Rayya Syauqi Alulu'i    | Role 2         |
 ---
 
 ## 🚀 How to Run the Project
+note: dont forget to create .env.local with your Gemini API Key
 
 ### Step 1. Clone the Repository
 ```bash
