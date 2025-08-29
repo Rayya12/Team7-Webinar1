@@ -49,7 +49,7 @@ Rayya Syauqi Alulu'i    | Frontend Engineer        |
 ---
 
 ## 🚀 How to Run the Project
-note: dont forget to create .env.local with your Gemini API Key
+note: dont forget to create .env.local with your Gemini API Key in the folder
 
 ### Step 1. Clone the Repository
 ```bash
