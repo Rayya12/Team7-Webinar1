@@ -48,8 +48,8 @@ export default function Chat() {
           {messages.length === 0 && (
             <div className="flex flex-col items-center justify-center h-full text-center text-muted-foreground py-8">
               <Image src="/robot.png" height={100} width={100} alt='logo careerAI' className='mb-2'></Image>
-              <p className="text-lg font-medium mb-2">Selamat Datang di CareerAI</p>
-              <p className="text-sm">Mulai Konsultasi Karir Anda Dengan Kirim Pesan Di sini</p>
+              <p className="text-lg font-medium mb-2">Selamat Datang di Chatbot Interviewer PT Maju Sejahtera</p>
+              <p className="text-sm">Mulai Interview Anda Dengan Kirim Pesan Di sini</p>
             </div>
           )}
 
