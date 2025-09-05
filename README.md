@@ -10,10 +10,10 @@ Proyek ini adalah sebuah Chatbot AI yang dirancang untuk melakukan sesi wawancar
 
 | **Name**                    | **Role**       |
 |-----------------------------|----------------|
-| Rafly Zulfikar AlKautsar    | Role 1         |
-| Rayya Syauqi Alulu'i        | Role 2         |
-| Zidane Surya Nugraha        | Role 3         |
-| Ukasyah                     | Role 4         |
+| Rafly Zulfikar AlKautsar    | Backend enginer|
+| Rayya Syauqi Alulu'i        | Project Manager|
+| Zidane Surya Nugraha        | Model Engineer |
+| Ukasyah                     | Backenddantest |
 
 
 ---
