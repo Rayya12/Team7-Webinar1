@@ -7,12 +7,14 @@ Proyek ini adalah sebuah Chatbot AI yang dirancang untuk melakukan sesi wawancar
 
 ## 🧑‍💻 Team
 
+
 | **Name**                    | **Role**       |
 |-----------------------------|----------------|
 | Rafly Zulfikar AlKautsar    | Role 1         |
 | Rayya Syauqi Alulu'i        | Role 2         |
 | Zidane Surya Nugraha        | Role 3         |
 | Ukasyah                     | Role 4         |
+
 
 ---
 
@@ -37,6 +39,7 @@ Proyek ini adalah sebuah Chatbot AI yang dirancang untuk melakukan sesi wawancar
 ---
 
 ## 🚀 How to Run the Project
+note: dont forget to create .env.local with your Gemini API Key in the folder
 
 ### Step 1. Clone the Repository
 ```bash
