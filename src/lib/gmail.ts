@@ -1,3 +1,4 @@
+
 // lib/gmail.ts
 
 import { google } from 'googleapis';
@@ -12,10 +13,13 @@ import { google } from 'googleapis';
 export async function sendGmail(to: string, subject: string, html: string) {
   // 1. Membuat client otorisasi dengan kredensial dari .env
   const oAuth2Client = new google.auth.OAuth2(
+
     process.env.GMAIL_CLIENT_ID!,
     process.env.GMAIL_CLIENT_SECRET!,
     process.env.GMAIL_REDIRECT_URI!
   );
+  
+
 
   // 2. Mengatur token akses & refresh yang sudah kita dapatkan
   oAuth2Client.setCredentials({
