@@ -10,10 +10,10 @@ Proyek ini adalah sebuah Chatbot AI yang dirancang untuk melakukan sesi wawancar
 
 | **Name**                    | **Role**       |
 |-----------------------------|----------------|
-| Rafly Zulfikar AlKautsar    | Role 1         |
-| Rayya Syauqi Alulu'i        | Role 2         |
-| Zidane Surya Nugraha        | Role 3         |
-| Ukasyah                     | Role 4         |
+| Rafly Zulfikar AlKautsar    | Backend enginer|
+| Rayya Syauqi Alulu'i        | Project Manager|
+| Zidane Surya Nugraha        | Model Engineer |
+| Ukasyah                     | Backenddantest |
 
 
 ---
@@ -50,9 +50,10 @@ cd Team7-Webinar1
 ### Step 2. Instal Dependensi
 ```bash
 npm install
+npm i zod googleapis (jika perlu)
 ```
 
-### Step 3 Konfigurasi .env.local
+### Step 3 Konfigurasi .env.local (dapatkan dari google cloud)
 ```bash
 GOOGLE_API_KEY=...
 GMAIL_CLIENT_ID=...
@@ -60,7 +61,7 @@ GMAIL_CLIENT_SECRET=...
 GMAIL_REDIRECT_URI=http://localhost:3000/api/chat/google/oauth/callback
 GMAIL_SENDER=...
 
-# Jangan di-commit ke Git!
+# Jangan di-commit ke Git! 
 GMAIL_ACCESS_TOKEN=...
 GMAIL_REFRESH_TOKEN=...
 ```
@@ -73,6 +74,7 @@ npm run dev
 ### Step 5. Authorize Google Account
 ```bash
 http://localhost:3000/api/chat/google/oauth/start
+isi GMAIL_ACCESS_TOKEN dan GMAIL_REFRESH_TOKEN dari token yang ada di console anda!
 ```
 
 ## 📋 Requirements (optional)

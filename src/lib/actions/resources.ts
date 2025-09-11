@@ -1,4 +1,5 @@
-"use server";
+
+'use server';
 
 import {
   NewResourceParams,
@@ -8,6 +9,7 @@ import {
 import { db } from "../db";
 import { generateEmbeddings } from "../ai/embedding";
 import { embeddings as embeddingsTable } from "../db/schema/embeddings";
+
 
 export const createResource = async (input: NewResourceParams) => {
   try {
@@ -33,3 +35,4 @@ export const createResource = async (input: NewResourceParams) => {
       : "Error, please try again.";
   }
 };
+
